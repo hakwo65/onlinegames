@@ -3,338 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Game Portal</title>
+    <title>Game Launcher</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Optional: Add a nice font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>My Awesome Games</h1>
-        <nav>
-            <!-- Future: <a href="#">Categories</a> <input type="search" placeholder="Search games..."> -->
-        </nav>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Welcome to Our Games!</h1>
+            <p>Select a game to play or explore.</p>
+        </header>
 
-    <main>
-        <section id="game-grid-container">
-            <h2>All Games</h2>
-            <div class="game-grid" id="gameGrid">
-                <!-- Game cards will be injected here by JavaScript -->
+        <div class="icon-grid">
+            <!-- Row 1 -->
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/FF5733/FFFFFF?text=Game+1" alt="Game Icon 1">
+                <span>Adventure Quest</span>
             </div>
-        </section>
-
-        <section id="game-player-container" class="hidden">
-            <button id="closeGamePlayer" class="close-button">× Back to Games</button>
-            <div class="game-iframe-wrapper">
-                <iframe id="gameFrame" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/33FF57/FFFFFF?text=Game+2" alt="Game Icon 2">
+                <span>Puzzle Mania</span>
             </div>
-            <h3 id="currentGameTitle"></h3>
-        </section>
-    </main>
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/3357FF/FFFFFF?text=Game+3" alt="Game Icon 3">
+                <span>Space Shooter</span>
+            </div>
 
-    <footer>
-        <p>© 2023 My Game Portal</p>
-    </footer>
+            <!-- Row 2 -->
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/FFFF33/000000?text=Game+4" alt="Game Icon 4">
+                <span>Racing Kings</span>
+            </div>
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/FF33FF/FFFFFF?text=Game+5" alt="Game Icon 5">
+                <span>Strategy Masters</span>
+            </div>
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/33FFFF/000000?text=Game+6" alt="Game Icon 6">
+                <span>Word Finder</span>
+            </div>
 
-    <script src="script.js"></script>
+            <!-- Row 3 -->
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/FFA500/FFFFFF?text=Game+7" alt="Game Icon 7">
+                <span>Block Breaker</span>
+            </div>
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/800080/FFFFFF?text=Game+8" alt="Game Icon 8">
+                <span>Arcade Classics</span>
+            </div>
+            <div class="app-icon">
+                <img src="https://placehold.co/100x100/008000/FFFFFF?text=Game+9" alt="Game Icon 9">
+                <span>Mystery Mansion</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 Your Game Studio</p>
+        </footer>
+    </div>
 </body>
 </html>
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f0f2f5;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-header {
-    background-color: #4A90E2; /* Poki-like blue */
-    color: white;
-    padding: 15px 30px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2em;
-}
-
-nav {
-    margin-top: 10px;
-}
-
-main {
-    flex-grow: 1;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 20px auto; /* Center content */
-    width: 95%;
-}
-
-#game-grid-container h2, #game-player-container h3 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.game-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Responsive grid */
-    gap: 20px;
-}
-
-.game-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-}
-
-.game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-.game-card img {
-    width: 100%;
-    height: 120px; /* Fixed height for consistency */
-    object-fit: cover; /* Crop images nicely */
-    border-bottom: 1px solid #eee;
-}
-
-.game-card .game-info {
-    padding: 10px;
-    text-align: center;
-    flex-grow: 1; /* Pushes title down if description is added */
-}
-
-.game-card .game-info h4 {
-    margin: 0 0 5px 0;
-    font-size: 1em;
-    color: #333;
-}
-
-/* Game Player Styles */
-#game-player-container {
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent overlay */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.game-iframe-wrapper {
-    width: 90%;
-    max-width: 900px; /* Max width for the game */
-    height: 80%; /* Relative to parent */
-    max-height: 600px; /* Max height for the game */
-    background-color: #000;
-    border: 3px solid #fff;
-    border-radius: 8px;
-    overflow: hidden; /* For iframe */
-    margin-bottom: 15px;
-}
-
-#gameFrame {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-#currentGameTitle {
-    color: white;
-    font-size: 1.5em;
-    margin-top: 0; /* Reset from h3 default */
-}
-
-.close-button {
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute; /* Position it relative to the game-player-container */
-    top: 30px;
-    right: 30px;
-    z-index: 1001; /* Above iframe wrapper */
-}
-
-.close-button:hover {
-    background-color: #ee5253;
-}
-
-.hidden {
-    display: none !important; /* Use !important to override default display */
-}
-
-footer {
-    background-color: #333;
-    color: #aaa;
-    text-align: center;
-    padding: 15px;
-    font-size: 0.9em;
-}
-
-/* Simple Responsive Adjustments */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-    .game-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
-    }
-    .game-card img {
-        height: 100px;
-    }
-    .game-card .game-info h4 {
-        font-size: 0.9em;
-    }
-    .game-iframe-wrapper {
-        width: 95%;
-        height: 75%;
-    }
-    .close-button {
-        top: 15px;
-        right: 15px;
-        padding: 8px 15px;
-    }
-}
-document.addEventListener('DOMContentLoaded', () => {
-    const gameGrid = document.getElementById('gameGrid');
-    const gamePlayerContainer = document.getElementById('game-player-container');
-    const gameFrame = document.getElementById('gameFrame');
-    const closeGamePlayerButton = document.getElementById('closeGamePlayer');
-    const gameGridContainer = document.getElementById('game-grid-container');
-    const currentGameTitleElement = document.getElementById('currentGameTitle');
-
-    // --- GAME DATA ---
-    // This is where you'd list your games.
-    // IMPORTANT: You need actual URLs for HTML5 games for 'gameUrl'.
-    // I'm using placeholder URLs and images.
-    const gamesData = [
-        {
-            id: 1,
-            title: "Awesome Jumper",
-            thumbnailUrl: "https://via.placeholder.com/300x200/FFA500/FFFFFF?text=Jumper+Game",
-            // Example: Find open-source HTML5 games on GitHub or itch.io that allow embedding
-            gameUrl: "https://html5games.com/Game/Awesome-Jumper/12345", // REPLACE WITH ACTUAL GAME URL
-            category: "Platformer"
-        },
-        {
-            id: 2,
-            title: "Puzzle Mania",
-            thumbnailUrl: "https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Puzzle+Game",
-            gameUrl: "about:blank", // REPLACE WITH ACTUAL GAME URL (about:blank is just a blank page)
-            category: "Puzzle"
-        },
-        {
-            id: 3,
-            title: "Space Shooter",
-            thumbnailUrl: "https://via.placeholder.com/300x200/007BFF/FFFFFF?text=Space+Game",
-            gameUrl: "about:blank", // REPLACE
-            category: "Action"
-        },
-        {
-            id: 4,
-            title: "Racing Fun",
-            thumbnailUrl: "https://via.placeholder.com/300x200/DC3545/FFFFFF?text=Racing+Game",
-            gameUrl: "about:blank", // REPLACE
-            category: "Racing"
-        },
-        {
-            id: 5,
-            title: "Strategy Masters",
-            thumbnailUrl: "https://via.placeholder.com/300x200/FFC107/000000?text=Strategy",
-            gameUrl: "about:blank", // REPLACE
-            category: "Strategy"
-        },
-        {
-            id: 6,
-            title: "Card King",
-            thumbnailUrl: "https://via.placeholder.com/300x200/6f42c1/FFFFFF?text=Card+Game",
-            gameUrl: "about:blank", // REPLACE
-            category: "Card"
-        }
-        // Add more game objects here
-    ];
-
-    // --- FUNCTIONS ---
-
-    function renderGameGrid() {
-        if (!gameGrid) return;
-        gameGrid.innerHTML = ''; // Clear existing games
-
-        gamesData.forEach(game => {
-            const card = document.createElement('div');
-            card.classList.add('game-card');
-            card.dataset.gameId = game.id; // Store game id for click handling
-
-            const thumbnail = document.createElement('img');
-            thumbnail.src = game.thumbnailUrl;
-            thumbnail.alt = game.title;
-
-            const info = document.createElement('div');
-            info.classList.add('game-info');
-
-            const title = document.createElement('h4');
-            title.textContent = game.title;
-
-            info.appendChild(title);
-            card.appendChild(thumbnail);
-            card.appendChild(info);
-
-            card.addEventListener('click', () => loadGame(game.id));
-            gameGrid.appendChild(card);
-        });
-    }
-
-    function loadGame(gameId) {
-        const game = gamesData.find(g => g.id === parseInt(gameId));
-        if (game) {
-            // Check if the game URL is valid (not "about:blank" or a placeholder)
-            if (game.gameUrl && game.gameUrl !== "about:blank" && !game.gameUrl.includes("html5games.com/Game/")) {
-                gameFrame.src = game.gameUrl;
-            } else {
-                // If it's a placeholder, show an alert and don't change the iframe src.
-                // Or, you could set gameFrame.src to a page saying "Game not available"
-                alert(`Game "${game.title}" is not available yet. Please replace the placeholder URL in script.js.`);
-                gameFrame.src = "about:blank"; // Keep it blank or show a specific message page
-            }
-            currentGameTitleElement.textContent = game.title;
-            gameGridContainer.classList.add('hidden');
-            gamePlayerContainer.classList.remove('hidden');
-        }
-    }
-
-    function closeGamePlayer() {
-        gameFrame.src = 'about:blank'; // Stop the game from running in the background
-        currentGameTitleElement.textContent = '';
-        gamePlayerContainer.classList.add('hidden');
-        gameGridContainer.classList.remove('hidden');
-    }
-
-    // --- INITIALIZATION ---
-    if (closeGamePlayerButton) {
-        closeGamePlayerButton.addEventListener('click', closeGamePlayer);
-    }
-
-    renderGameGrid(); // Initial render of the game grid
-});
