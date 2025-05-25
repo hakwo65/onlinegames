@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #d0f0f0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Hide scrollbars if game container is too big */
+}
+
+#game-container {
+    width: 300px; /* Represents 3 lanes of 100px each */
+    height: 500px;
+    background-color: #777; /* Track color */
+    border: 5px solid #333;
+    position: relative;
+    overflow: hidden; /* Obstacles disappear when they go out */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#player {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    position: absolute;
+    bottom: 20px;
+    left: 125px; /* Start in the middle lane ( (300/2) - (50/2) ) */
+    transition: left 0.1s linear; /* Smooth lane change */
+    z-index: 10;
+}
+
+.obstacle {
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    position: absolute;
+    left: 120px; /* Default, will be set by JS */
+    z-index: 5;
+}
+
+#score-board {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+#game-over-message {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid red;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 28px;
+    color: red;
+    position: absolute; /* Position over the game */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+#game-over-message button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.controls-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
