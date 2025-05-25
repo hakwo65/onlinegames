@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cromine Games</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #0044cc;
+      padding: 15px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    .search-box {
+      margin-top: 10px;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 200px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .games-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .game-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .game-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .game-card p {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cromine Game</h1>
+    <div class="search-box">
+      <input type="text" placeholder="Search games...">
+    </div>
+  </header>
+
+  <main class="games-container">
+    <div class="game-card" onclick="location.href='car-racing.html'">
+      <img src="https://via.placeholder.com/150x100?text=Car+Racing" alt="Car Racing">
+      <p>Car Racing</p>
+    </div>
+
+    <div class="game-card" onclick="location.href='bubble-blast.html'">
+      <img src="https://via.placeholder.com/150x100?text=Bubble+Blast" alt="Bubble Blast">
+      <p>Bubble Blast</p>
+    </div>
+
+    <!-- Add more games below -->
+    <div class="game-card">
+      <img src="https://via.placeholder.com/150x100?text=Coming+Soon" alt="Coming Soon">
+      <p>New Game</p>
+    </div>
+  </main>
+</body>
+</html>
