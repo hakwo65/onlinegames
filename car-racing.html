@@ -1,140 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Car Racing Game 2D</title>
+  <meta charset="UTF-8" />
+  <title>2D Lap-based Car Racing Game</title>
   <style>
     body {
       margin: 0;
       background: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      user-select: none;
+      overflow: hidden;
     }
     canvas {
-      display: block;
-      margin: auto;
       background: #111;
+      border: 3px solid #555;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="300" height="500"></canvas>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    const roadWidth = 200;
-    const roadX = (canvas.width - roadWidth) / 2;
+    // Track parameters
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const trackRadiusOuter = 150;
+    const trackRadiusInner = 100;
 
-    let carX = roadX + 80;
-    const carY = 400;
+    // Car parameters
     const carWidth = 40;
-    const carHeight = 60;
+    const carHeight = 70;
+    let carAngle = 0; // position on track in radians
+    const carSpeed = 0.02; // forward speed along track angle
 
-    let obstacleX = roadX + Math.random() * (roadWidth - 40);
-    let obstacleY = -60;
-    const obstacleWidth = 40;
-    const obstacleHeight = 60;
+    // Obstacles on the track (for demo, fixed positions)
+    const obstacles = [
+      { angle: Math.PI / 2, passed: false },
+      { angle: Math.PI, passed: false },
+      { angle: (3 * Math.PI) / 2, passed: false },
+    ];
+    const obstacleRadius = 15;
 
-    let roadLineY = 0;
-    let treeY = 0;
-    let buildingY = 0;
+    // Load car image (top-down)
+    const carImg = new Image();
+    carImg.src = "https://i.imgur.com/3eZ2PYN.png"; // sample top-down car image (transparent)
 
-    let gameOver = false;
+    let laps = 0;
 
-    function drawBackground() {
-      // Sky background
-      ctx.fillStyle = '#222';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Buildings
-      for (let i = 0; i < 5; i++) {
-        let x = i * 60;
-        ctx.fillStyle = "#444";
-        ctx.fillRect(x, (buildingY + i * 100) % canvas.height, 40, 60);
-      }
-    }
-
-    function drawRoad() {
+    function drawTrack() {
+      // Outer track
       ctx.fillStyle = "#555";
-      ctx.fillRect(roadX, 0, roadWidth, canvas.height);
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, trackRadiusOuter, 0, Math.PI * 2);
+      ctx.fill();
 
-      // Lane lines
-      ctx.strokeStyle = "#fff";
+      // Inner track hole
+      ctx.fillStyle = "#111";
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, trackRadiusInner, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Lane lines (dashed circle in middle of track)
+      ctx.strokeStyle = "white";
       ctx.lineWidth = 4;
-      for (let i = 0; i < 10; i++) {
-        const lineY = (roadLineY + i * 60) % canvas.height;
-        ctx.beginPath();
-        ctx.moveTo(canvas.width / 2, lineY);
-        ctx.lineTo(canvas.width / 2, lineY + 30);
-        ctx.stroke();
-      }
-    }
-
-    function drawTrees() {
-      ctx.fillStyle = "green";
-      for (let i = 0; i < 6; i++) {
-        const y = (treeY + i * 100) % canvas.height;
-        ctx.beginPath();
-        ctx.arc(roadX - 20, y, 15, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(roadX + roadWidth + 20, y, 15, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      ctx.setLineDash([15, 15]);
+      ctx.beginPath();
+      const midRadius = (trackRadiusOuter + trackRadiusInner) / 2;
+      ctx.arc(centerX, centerY, midRadius, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
     }
 
     function drawCar() {
-      ctx.fillStyle = "lime";
-      ctx.fillRect(carX, carY, carWidth, carHeight);
+      const radius = (trackRadiusInner + trackRadiusOuter) / 2;
+      const carX = centerX + radius * Math.cos(carAngle);
+      const carY = centerY + radius * Math.sin(carAngle);
+
+      ctx.save();
+      ctx.translate(carX, carY);
+      ctx.rotate(carAngle + Math.PI / 2); // rotate so car faces forward along track
+      ctx.drawImage(carImg, -carWidth / 2, -carHeight / 2, carWidth, carHeight);
+      ctx.restore();
     }
 
-    function drawObstacle() {
-      ctx.fillStyle = "red";
-      ctx.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
+    function drawObstacles() {
+      obstacles.forEach(obstacle => {
+        const radius = (trackRadiusInner + trackRadiusOuter) / 2;
+        const obsX = centerX + radius * Math.cos(obstacle.angle);
+        const obsY = centerY + radius * Math.sin(obstacle.angle);
+
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.arc(obsX, obsY, obstacleRadius, 0, Math.PI * 2);
+        ctx.fill();
+      });
     }
 
-    function moveElements() {
-      roadLineY += 5;
-      treeY += 3;
-      buildingY += 1;
+    function checkCollision() {
+      const radius = (trackRadiusInner + trackRadiusOuter) / 2;
+      const carX = centerX + radius * Math.cos(carAngle);
+      const carY = centerY + radius * Math.sin(carAngle);
 
-      obstacleY += 5;
-      if (obstacleY > canvas.height) {
-        obstacleY = -60;
-        obstacleX = roadX + Math.random() * (roadWidth - obstacleWidth);
+      for (const obstacle of obstacles) {
+        const obsX = centerX + radius * Math.cos(obstacle.angle);
+        const obsY = centerY + radius * Math.sin(obstacle.angle);
+
+        const dx = carX - obsX;
+        const dy = carY - obsY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < obstacleRadius + Math.max(carWidth, carHeight) / 2 - 10) {
+          alert("Game Over! You crashed!");
+          location.reload();
+        }
       }
     }
 
-    function detectCollision() {
-      if (
-        carX < obstacleX + obstacleWidth &&
-        carX + carWidth > obstacleX &&
-        carY < obstacleY + obstacleHeight &&
-        carY + carHeight > obstacleY
-      ) {
-        gameOver = true;
-        alert("Game Over!");
-        location.reload();
+    function update() {
+      // Move car forward on the track
+      carAngle += carSpeed;
+
+      // Complete lap
+      if (carAngle > Math.PI * 2) {
+        carAngle -= Math.PI * 2;
+        laps++;
+        console.log("Lap completed: " + laps);
       }
     }
 
     function draw() {
-      if (gameOver) return;
-
-      drawBackground();
-      drawRoad();
-      drawTrees();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawTrack();
+      drawObstacles();
       drawCar();
-      drawObstacle();
-      moveElements();
-      detectCollision();
-
+      checkCollision();
+      update();
       requestAnimationFrame(draw);
     }
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft" && carX > roadX) carX -= 10;
-      if (e.key === "ArrowRight" && carX < roadX + roadWidth - carWidth) carX += 10;
+      if (e.key === "ArrowLeft") {
+        carAngle -= 0.05; // steer left
+      } else if (e.key === "ArrowRight") {
+        carAngle += 0.05; // steer right
+      }
     });
+
+    carImg.onload = () => {
+      draw();
+    };
+  </script>
+</body>
+</html>
+
 
     draw();
   </script>
