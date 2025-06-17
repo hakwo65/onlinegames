@@ -3,994 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Studio | Professional Game Development</title>
-    <meta name="description" content="We create amazing mobile and web games including Hill Climb Racing and other popular titles">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Cromine Games - Download Our App</title>
     <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --dark: #2d3436;
-            --light: #f5f6fa;
-            --accent: #fd79a8;
-            --success: #00b894;
-            --warning: #fdcb6e;
-            --danger: #d63031;
-            --card-bg: #ffffff;
-            --text: #2d3436;
-            --text-light: #636e72;
-        }
-
-        * {
+        /* CSS Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* Header Styles */
-        header {
-            background-color: var(--dark);
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6; }
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #4CAF50;
             color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
         }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .download-btn:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn:active {
+            transform: translateY(1px);
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 150px 0 100px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--accent);
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            animation: fadeIn 1.5s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            margin-left: 15px;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* Games Section */
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .games {
-            padding: 100px 0;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .game-card-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .game-card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .game-card:hover .game-card-img img {
-            transform: scale(1.1);
-        }
-
-        .game-card-content {
-            padding: 20px;
-        }
-
-        .game-card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        .game-card-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .game-card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .game-rating {
-            color: var(--warning);
-            font-weight: 600;
-        }
-
-        .game-price {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .game-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--accent);
-            color: white;
-            padding: 5px 10px;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background: var(--card-bg);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 40px 20px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .testimonials .section-title h2 {
-            color: white;
-        }
-
-        .testimonials .section-title h2::after {
-            background: var(--accent);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-
-        .author-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 15px;
-        }
-
-        .author-img img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
+            border: 3px solid white;
         }
 
-        .author-info h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .author-info p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 80px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .footer-col h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 2px;
-            background: var(--accent);
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer-col p {
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            padding-left: 5px;
-            color: var(--accent);
-        }
-
-        .social-links {
+        .features {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem 0;
         }
 
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            color: white;
-            transition: all 0.3s ease;
+        .feature {
+            flex: 1;
+            min-width: 200px;
+            margin: 1rem;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
         }
 
-        .social-links a:hover {
-            background: var(--accent);
-            transform: translateY(-5px);
+        .feature:hover {
+            transform: scale(1.05);
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: var(--dark);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.5s ease;
-            }
-
-            nav ul.active {
-                left: 0;
-            }
-
-            nav ul li {
-                margin: 15px 0;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
+        @media (max-width: 600px) {
+            h1 {
                 font-size: 2.5rem;
             }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 10px 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero {
-                padding: 120px 0 80px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .games-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">Game<span>Studio</span></a>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#games">Games</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Create. Play. Enjoy.</h1>
-            <p>We develop high-quality mobile and web games that millions of players enjoy worldwide. Our portfolio includes 9 award-winning titles across multiple genres.</p>
-            <a href="#games" class="btn">Explore Games</a>
-            <a href="#contact" class="btn btn-outline">Contact Us</a>
-        </div>
-    </section>
-
-    <!-- Games Section -->
-    <section class="games" id="games">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Popular Games</h2>
+    <div class="container">
+        <!-- Replace with your logo -->
+        <img src="https://via.placeholder.com/120" alt="Cromine Games Logo" class="logo">
+        
+        <h1>Welcome to Cromine Games</h1>
+        <p>Experience the next level of mobile gaming with our exciting new app. Download now to start playing!</p>
+        
+        <button class="download-btn" id="downloadBtn">Download APK</button>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>High Quality</h3>
+                <p>Premium graphics and smooth gameplay</p>
             </div>
-            <div class="games-grid">
-                <!-- Game 1 -->
-                <div class="game-card">
-                    <div class="game-badge">New</div>
-                    <div class="game-card-img">
-                        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fventurebeat.com%2Fgames%2Ffingersofts-hill-climb-racing-2-mobile-game-surpasses-40-million-downloads%2F&psig=AOvVaw1DyajZdoIIEzLTQvrMRKCZ&ust=1748251595888000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNiM5Pqmvo0DFQAAAAAdAAAAABAE600x400?text=Hill+Climb+Racing" alt="Hill Climb Racing">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Hill Climb Racing</h3>
-                        <p>Physics-based driving game with hill climbing challenges across various terrains.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.8
-                            </div>
-                            <div class="game-price">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 2 -->
-                <div class="game-card">
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Space+Adventures" alt="Space Adventures">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Space Adventures</h3>
-                        <p>Explore the galaxy in this epic space exploration and combat game.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.7
-                            </div>
-                            <div class="game-price">$2.99</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 3 -->
-                <div class="game-card">
-                    <div class="game-badge">Popular</div>
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Zombie+Survival" alt="Zombie Survival">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Zombie Survival</h3>
-                        <p>Fight hordes of zombies in this action-packed survival shooter.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.9
-                            </div>
-                            <div class="game-price">$1.99</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 4 -->
-                <div class="game-card">
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Puzzle+Master" alt="Puzzle Master">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Puzzle Master</h3>
-                        <p>Challenge your brain with hundreds of mind-bending puzzles.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.6
-                            </div>
-                            <div class="game-price">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 5 -->
-                <div class="game-card">
-                    <div class="game-badge">Editor's Choice</div>
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Racing+Legends" alt="Racing Legends">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Racing Legends</h3>
-                        <p>Compete against the best in this high-speed racing simulation.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.8
-                            </div>
-                            <div class="game-price">$3.99</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 6 -->
-                <div class="game-card">
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Farm+Tycoon" alt="Farm Tycoon">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Farm Tycoon</h3>
-                        <p>Build and manage your dream farm in this relaxing simulation game.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.5
-                            </div>
-                            <div class="game-price">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 7 -->
-                <div class="game-card">
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Word+Challenge" alt="Word Challenge">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Word Challenge</h3>
-                        <p>Test your vocabulary in this addictive word puzzle game.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.7
-                            </div>
-                            <div class="game-price">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 8 -->
-                <div class="game-card">
-                    <div class="game-badge">Coming Soon</div>
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Dragon+Quest" alt="Dragon Quest">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Dragon Quest</h3>
-                        <p>Embark on an epic RPG adventure in a fantasy world of dragons.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.9
-                            </div>
-                            <div class="game-price">Pre-order</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game 9 -->
-                <div class="game-card">
-                    <div class="game-card-img">
-                        <img src="https://via.placeholder.com/600x400?text=Sports+Manager" alt="Sports Manager">
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Sports Manager</h3>
-                        <p>Take control of your favorite sports team and lead them to victory.</p>
-                        <div class="game-card-meta">
-                            <div class="game-rating">
-                                <i class="fas fa-star"></i> 4.4
-                            </div>
-                            <div class="game-price">$2.49</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature">
+                <h3>Free to Play</h3>
+                <p>No hidden charges or subscriptions</p>
+            </div>
+            <div class="feature">
+                <h3>Regular Updates</h3>
+                <p>New content added frequently</p>
             </div>
         </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Our Games</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3>Engaging Gameplay</h3>
-                    <p>Our games feature carefully designed mechanics that keep players coming back for more.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Stunning Graphics</h3>
-                    <p>High-quality visuals that immerse players in unique and beautiful game worlds.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Optimized Performance</h3>
-                    <p>Smooth gameplay experience across all devices with minimal battery usage.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Multiplayer Support</h3>
-                    <p>Play with friends or compete against players worldwide in our multiplayer games.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3>Cloud Saves</h3>
-                    <p>Your progress is saved automatically and can be accessed from any device.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>Regular Updates</h3>
-                    <p>We constantly improve our games with new content and features based on player feedback.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Players Say</h2>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "Hill Climb Racing is the most addictive game I've played in years! The physics are amazing and the challenges keep me coming back."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John D.">
-                        </div>
-                        <div class="author-info">
-                            <h4>John D.</h4>
-                            <p>Professional Gamer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "The quality of these games is outstanding. I've purchased several and never been disappointed. Keep up the great work!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah M.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah M.</h4>
-                            <p>Game Reviewer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "My kids love these games and I appreciate that they're family-friendly with no intrusive ads. Worth every penny!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Michael T.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael T.</h4>
-                            <p>Parent</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-            </div>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Subject">
-                </div>
-                <div class="form-group">
-                    <textarea placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>GameStudio</h3>
-                    <p>Creating amazing gaming experiences since 2015. Our mission is to bring joy to players worldwide through innovative and entertaining games.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#games">Games</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Game Street, San Francisco, CA</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@gamestudio.com</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 GameStudio. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        // JavaScript for download functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Replace with your actual APK file URL
+            const apkUrl = 'YOUR_APK_FILE_URL_HERE.apk';
+            
+            // Create a temporary anchor element to trigger download
+            const link = document.createElement('a');
+            link.href = apkUrl;
+            link.download = 'CromineGames.apk'; // The filename users will see
+            
+            // Append to body, click and then remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Optional: Track downloads (replace with your analytics code)
+            console.log('Download initiated');
+            
+            // Optional: Show download confirmation
+            alert('Download started! If it doesn\'t begin automatically, check your browser downloads.');
         });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Sticky header on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
-        });
-
-        // Form submission
-        const contactForm = document.querySelector('.contact-form');
-        if(contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            });
-        }
     </script>
-</body>
-</html>
-
-    <script src="script.js"></script>
 </body>
 </html>
