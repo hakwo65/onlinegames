@@ -1,12 +1,7 @@
 [
   {
-    "name": "Avengers Endgame",
-    "thumbnail": "https://hakwo65.github.io/onlinegames/image1.png",
-    "videoUrl": "https://hakwo65.github.io/onlinegames/video.mp4"
-  },
-  {
-    "name": "KGF Chapter 2",
-    "thumbnail": "https://hakwo65.github.io/onlinegames/image1.png",
-    "videoUrl": "https://hakwo65.github.io/crominegames.com/video1.mp4"
+    "name": "Avengers Endgame Trailer",
+    "thumbnail": "https://img.youtube.com/vi/TcMBFSGVi1c/0.jpg",
+    "videoUrl": "TcMBFSGVi1c"
   }
 ]
